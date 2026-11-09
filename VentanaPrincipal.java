@@ -5,17 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Proyecto: Evaluación Parcial - Construcción de Software I
- * Institución: Tecnológico de Antioquia (TdeA)
- * Descripción: Aplicación gráfica para operaciones matemáticas y conversiones.
- * 
- * FASE ACTUAL: Día 2 - Integrante 1 (Pedro Salamanca)
+  * FASE ACTUAL: Día 2 - Integrante 2 (Cierre y Validación Final)
  * Contenido del avance:
- * - Implementación funcional del módulo de Conversión de Moneda (USD a COP y COP a USD).
- * - Aplicación de la tasa de cambio fija requerida: 1 USD = $3.200 COP.
- * - Validaciones de campos vacíos, valores numéricos y control de montos no negativos.
- * - Integración con los módulos previos de Operaciones Matemáticas y Temperatura.
+ * - Verificación de los 8 botones de operación y conversión.
+ * - Validaciones de campos vacíos, valores no numéricos y división por cero.
+ * - Ajuste del botón de limpieza.
  */
+
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
     // --- Componentes: Módulo Matemático ---
