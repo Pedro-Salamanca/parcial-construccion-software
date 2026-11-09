@@ -9,11 +9,12 @@ import java.awt.event.ActionListener;
  * Institución: Tecnológico de Antioquia (TdeA)
  * Descripción: Aplicación gráfica para operaciones matemáticas y conversiones.
  * 
- * FASE ACTUAL: Día 1 - Integrante 1
+ * FASE ACTUAL: Día 2 - Integrante 1 (Pedro Salamanca)
  * Contenido del avance:
- * - Creación de la ventana principal y maquetación de paneles modulares.
- * - Implementación funcional de las operaciones matemáticas básicas (Suma, Resta, Multiplicación, División).
- * - Validaciones de campos vacíos, valores numéricos y control de división por cero.
+ * - Implementación funcional del módulo de Conversión de Moneda (USD a COP y COP a USD).
+ * - Aplicación de la tasa de cambio fija requerida: 1 USD = $3.200 COP.
+ * - Validaciones de campos vacíos, valores numéricos y control de montos no negativos.
+ * - Integración con los módulos previos de Operaciones Matemáticas y Temperatura.
  */
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
@@ -191,7 +192,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         JPanel panel = new JPanel(new BorderLayout(10, 10));
         panel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createEtchedBorder(),
-                "3. Conversión de Moneda (Tasa fija: 1 USD = $3200 COP)",
+                "3. Conversión de Moneda (Tasa fija: 1 USD = $3.200 COP)",
                 TitledBorder.LEFT,
                 TitledBorder.TOP,
                 new Font("Arial", Font.BOLD, 13),
@@ -204,7 +205,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         panelEntrada.add(txtMoneda);
 
         // Subpanel de botones
-        JPanel panelBotones = new GridLayout(1, 2, 8, 8) != null ? new JPanel(new GridLayout(1, 2, 8, 8)) : new JPanel();
+        JPanel panelBotones = new JPanel(new GridLayout(1, 2, 8, 8));
         btnUsdACop = new JButton("USD a COP");
         btnCopAUsd = new JButton("COP a USD");
 
@@ -323,13 +324,33 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         }
 
         // -------------------------------------------------------------
-        // CONVERSIÓN DE MONEDA (Asignado a Día 2)
+        // CONVERSIÓN DE MONEDA (Implementado por Integrante 1 - Día 2)
         // -------------------------------------------------------------
         if (origen == btnUsdACop || origen == btnCopAUsd) {
-            JOptionPane.showMessageDialog(this,
-                    "Módulo de Moneda programado para la entrega de Día 2.",
-                    "Próxima Entrega",
-                    JOptionPane.INFORMATION_MESSAGE);
+            Double monto = validarCampoNumerico(txtMoneda, "Monto a convertir");
+            if (monto == null) return;
+
+            // Validación de valor no negativo para montos de dinero
+            if (monto < 0) {
+                JOptionPane.showMessageDialog(this,
+                        "El monto de dinero no puede ser un valor negativo.",
+                        "Valor inválido",
+                        JOptionPane.WARNING_MESSAGE);
+                txtMoneda.requestFocus();
+                return;
+            }
+
+            // Tasa de cambio fija obligatoria según especificación: 1 USD = 3.200 COP
+            final double TASA_FIJA_DOLAR = 3200.0;
+            double resultado = 0;
+
+            if (origen == btnUsdACop) {
+                resultado = monto * TASA_FIJA_DOLAR;
+                txtResMoneda.setText(String.format("$ %,.2f COP", resultado));
+            } else if (origen == btnCopAUsd) {
+                resultado = monto / TASA_FIJA_DOLAR;
+                txtResMoneda.setText(String.format("$ %,.2f USD", resultado));
+            }
             return;
         }
 
