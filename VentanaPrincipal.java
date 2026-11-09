@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
  * - Validaciones de campos vacíos, valores numéricos y control de montos no negativos.
  * - Integración con los módulos previos de Operaciones Matemáticas y Temperatura.
  */
+
 public class VentanaPrincipal extends JFrame implements ActionListener {
 
     // --- Componentes: Módulo Matemático ---
