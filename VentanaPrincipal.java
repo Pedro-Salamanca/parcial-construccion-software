@@ -305,13 +305,20 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
         }
 
         // -------------------------------------------------------------
-        // CONVERSIÓN DE TEMPERATURA (Asignado a Integrante 2 - Día 1)
+        // CONVERSIÓN DE TEMPERATURA (Implementado por Integrante 2 - Día 1)
         // -------------------------------------------------------------
         if (origen == btnCelsiusAFahrenheit || origen == btnFahrenheitACelsius) {
-            JOptionPane.showMessageDialog(this,
-                    "Módulo de Temperatura asignado a Integrante 2 (En desarrollo para el siguiente commit).",
-                    "Próxima Entrega",
-                    JOptionPane.INFORMATION_MESSAGE);
+            Double temp = validarCampoNumerico(txtTemperatura, "Grados a convertir");
+            if (temp == null) return;
+
+            double resultado = 0;
+            if (origen == btnCelsiusAFahrenheit) {
+                resultado = (temp * 9.0 / 5.0) + 32.0;
+                txtResTemperatura.setText(String.format("%.2f °F", resultado));
+            } else if (origen == btnFahrenheitACelsius) {
+                resultado = (temp - 32.0) * 5.0 / 9.0;
+                txtResTemperatura.setText(String.format("%.2f °C", resultado));
+            }
             return;
         }
 
